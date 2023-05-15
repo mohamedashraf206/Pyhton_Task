@@ -1,9 +1,35 @@
 from user import user
 from projects import Project
 import json
+import re
+# function validInput {
+#   # this function taske two argument the first is a string you want to check and the second is a regex
+
+#   read -r input
+#   echo " ***********************************"
+
+#   while ! [[ $input =~ ${1} ]]; do
+#     echo "please enter a valid input"
+#     read -r input
+#     echo " ***********************************"
+
+#   done
+
+# }
+def ValidateInput(regex):
+    userInput = input("")
+    regex = r'' + regex
+    while not(bool((re.match(regex, userInput)))):
+        userInput = input("plaease enter a valid input\n")
+    
+    return userInput
+
+
+
+
 
 def saveUser(thing):
-    with open("user.json", "a") as f:
+    with open("user.json", "w") as f:
         json.dump([p.__dict__ for p in thing], f, indent=4)
     
 
@@ -11,7 +37,6 @@ def loadUser():
     # Retrieve the objects from the file
     with open("user.json", "r") as f:
         user.users = [user(**p) for p in json.load(f)]
-        
         
         
         
@@ -31,11 +56,16 @@ def loadProject():
 
 
 def register():
-    fName=input("first name")
-    lName=input("last name")
-    email=input("email")
-    password=input("password")
-    mobile=input("mobile")
+    print("enter Fname \n")
+    fName=ValidateInput("^[a-zA-Z]{3,}$")
+    print("enter lname\n")
+    lName=ValidateInput("^[a-zA-Z]{3,}$")
+    print ("Enter your email \n")
+    email=ValidateInput("^[a-zA-Z0-9]{4,}@(gmail|outlook)\.com$")
+    print("enter your password\n")
+    password =ValidateInput("^[a-zA-Z0-9\!\@\#\$\%\^\&\(\)\_\+\=\~]{8,}$") 
+    print ("Enter your phone number\n")
+    mobile=ValidateInput("^(010|011|012|015)[0-9]{8,}$")
     usr=user(fName,lName,email,password,mobile)
     user.users.append(usr)
     saveUser(user.users)
