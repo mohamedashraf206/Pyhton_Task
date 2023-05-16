@@ -1,6 +1,7 @@
 import uuid
 class user:
     users=[]
+    signed_in = ""
     def __init__(self,fName,lName,email,password,mobile,id=(str(uuid.uuid4()))):
         self.fName=fName
         self.lName=lName
@@ -12,5 +13,6 @@ class user:
             
     def call (self):
         return "user"
+
 
  
