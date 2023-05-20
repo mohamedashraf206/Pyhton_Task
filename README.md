@@ -28,7 +28,7 @@ A console application for starting fundraise projects. The purpose of the applic
 
 ## Technologies Used
 - Python
-- SQLite3
+
 
 ## Inspiration
 Some similar projects that inspired us include:
